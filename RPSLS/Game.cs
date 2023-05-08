@@ -26,19 +26,23 @@ namespace RPSLS
 
         public int ChooseNumberOfHumanPlayers()
         {
-            Console.WriteLine("Will you be playing with 1 or 2 players?");
-            string numberOfPlayers = Console.ReadLine();
-            if (int.TryParse(numberOfPlayers, out int playerNumber))
-            {
-                Console.WriteLine($"You have chosen {playerNumber} players");
-            }
-            else 
-            { 
-                Console.WriteLine($"You have picked an incorrect number of players, {playerNumber} is not between 1 and 2"); 
-            }
-            return playerNumber;
-        }
+            int playerNumber;
 
+            while (true)
+            {
+                Console.WriteLine("Will you be playing with 1 or 2 players?");
+                string numberOfPlayers = Console.ReadLine();
+                if (int.TryParse(numberOfPlayers, out playerNumber) && (playerNumber == 1 || playerNumber == 2))
+                {
+                    Console.WriteLine($"You have chosen {playerNumber} players");
+                    return playerNumber;
+                }
+                else
+                {
+                    Console.WriteLine($"You have picked an incorrect number of players, {numberOfPlayers} is not between 1 and 2");
+                }
+            }
+        }
         public void CreatePlayerObjects(int numberOfHumanPlayers)
         {
 
@@ -57,7 +61,7 @@ namespace RPSLS
         public void RunGame()
         {
             WelcomeMessage();
-
+            ChooseNumberOfHumanPlayers();
         }
     }
 }
